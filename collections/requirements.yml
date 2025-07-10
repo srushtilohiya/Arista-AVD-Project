@@ -1,7 +1,7 @@
 collections:
   - name: arista.avd
-    version: "4.6.0"     # Confirmed version on Galaxy
+    version: "4.6.0"    # Confirmed stable
   - name: arista.cvp
-    version: "3.6.0"     # Use 3.x — latest stable
+    version: "3.6.0"    # Latest major
   - name: arista.eos
-    version: "4.6.0"
+    version: "1.3.0"    # ✅ Use a valid, published version
