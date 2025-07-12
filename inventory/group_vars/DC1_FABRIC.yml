@@ -23,9 +23,6 @@ mgmt_interface: Management0
 mgmt_interface_vrf: default
 mgmt_gateway: 172.20.20.1
 
-# Updated CVP configuration (use new variable name)
-cvp_instance_ips:
-  - 10.255.0.1
 
 spine:
   platform: cEOS
