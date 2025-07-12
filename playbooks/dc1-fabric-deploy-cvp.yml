@@ -7,6 +7,13 @@
     - arista.avd
     - arista.cvp
   tasks:
+    - name: Debug host vars
+      hosts: all
+      gather_facts: false
+      tasks:
+        - name: Dump host vars
+          debug:
+          var: hostvars[inventory_hostname]
     - name: 'reset local folders for output'
       tags: [build, generate]
       import_role:
