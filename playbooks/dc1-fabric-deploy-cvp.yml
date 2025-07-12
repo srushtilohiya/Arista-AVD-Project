@@ -7,25 +7,26 @@
     - arista.avd
     - arista.cvp
   tasks:
-  - name: 'reset local folders for output'
-    tags: [build, generate]
-    import_role:
-      name: arista.avd.build_output_folders
+    - name: 'reset local folders for output'
+      tags: [build, generate]
+      import_role:
+        name: arista.avd.build_output_folders
 
-  - name: generate intended variables
-    tags: [build, generate]
-    import_role:
-      name: eos_l3ls_evpn
+    - name: generate intended variables
+      tags: [build, generate]
+      import_role:
+        name: arista.avd.eos_l3ls_evpn
 
-  - name: generate device intended config and documentation
-    tags: [build, generate]
-    import_role:
-      name: eos_cli_config_gen
+    - name: generate device intended config and documentation
+      tags: [build, generate]
+      import_role:
+        name: arista.avd.eos_cli_config_gen
 
-  - name: Deploy configuration to devices
-    tags: [build, generate]
-    import_role:
-      name: arista.avd.eos_config_deploy_eapi
+    - name: Deploy configuration to devices
+      tags: [build, generate]
+      import_role:
+        name: arista.avd.eos_config_deploy_eapi
+
 
 
 #- name: Configuration deployment with CVP
