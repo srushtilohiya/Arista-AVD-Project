@@ -15,7 +15,7 @@
     - name: generate intended variables
       tags: [build, generate]
       import_role:
-        name: eos_l3ls_evpn  
+        name: arista.avd.eos_l3ls_evpn 
 
     - name: generate device intended config and documentation
       tags: [build, generate]
