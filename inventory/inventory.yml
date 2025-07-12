@@ -16,6 +16,9 @@ all:
             ansible_network_os: eos
             ansible_user: admin
             ansible_password: admin
+            # For AWX/Tower, use credentials instead of hardcoded passwords
+            # ansible_user: "{{ ansible_user }}"
+            # ansible_password: "{{ ansible_password }}"
             ansible_become: true
             ansible_become_method: enable
             ansible_httpapi_use_ssl: true
