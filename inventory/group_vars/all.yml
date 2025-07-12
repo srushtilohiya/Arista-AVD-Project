@@ -2,3 +2,15 @@
 root_dir: '/tmp/'
 inventory_file: '{{root_dir}}/inventory.yml'
 evpn_vlan_aware_bundles: true
+
+
+ansible_connection: httpapi
+ansible_network_os: eos
+ansible_user: admin
+ansible_password: admin
+ansible_become: true
+ansible_become_method: enable
+
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false
+ansible_httpapi_port: 443
