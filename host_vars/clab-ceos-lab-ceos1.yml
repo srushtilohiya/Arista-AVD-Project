@@ -1,16 +1,13 @@
----
 # Host variables for clab-ceos-lab-ceos1
 
 # Device type and role
 type: spine
 node_type: spine
+hostname: ceos1
 
 # Management interface
 mgmt_ip: 172.20.20.11/24
 mgmt_gateway: 172.20.20.1
-
-# Loopback interfaces
-loopback_ipv4_pool: 192.168.255.0/24
 
 # Spine specific settings
 spine:
@@ -19,7 +16,7 @@ spine:
     bgp_as: 65001
     loopback_ipv4_pool: 192.168.255.0/24
 
-# Platform specific settings
+# Platform-specific settings
 platform: cEOS
 platform_settings:
   - platforms: [cEOS]
