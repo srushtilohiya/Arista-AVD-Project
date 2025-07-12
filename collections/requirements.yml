@@ -1,7 +1,8 @@
+---
 collections:
   - name: arista.avd
-    version: "4.6.0"         # ✅ confirmed stable and current
+    version: "4.9.0"
   - name: arista.cvp
-    version: "3.11.0"        # ✅ satisfies AVD's dependency
+    version: "3.11.0"       # ✅ satisfies AVD's dependency
   - name: arista.eos
     version: "7.0.0"         # ✅ satisfies AVD's dependency
