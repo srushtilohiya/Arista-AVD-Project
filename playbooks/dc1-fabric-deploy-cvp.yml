@@ -1,15 +1,3 @@
----
-# Main AVD Playbook Without CVP
-
-- name: Debug host vars
-  hosts: DC1_FABRIC
-  connection: local
-  gather_facts: false
-  tasks:
-    - name: Dump host vars for troubleshooting
-      debug:
-        var: hostvars[inventory_hostname]
-
 - name: Manage Arista EOS EVPN/VXLAN Configuration (No CVP)
   hosts: DC1_FABRIC
   connection: local
@@ -21,6 +9,10 @@
       tags: [build, generate]
       import_role:
         name: arista.avd.build_output_folders
+
+    - name: 🔍 DEBUG — Dump all host variables before eos_designs
+      debug:
+        var: hostvars[inventory_hostname]
 
     - name: Generate intended variables
       tags: [build, generate]
