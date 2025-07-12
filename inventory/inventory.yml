@@ -2,19 +2,20 @@
 all:
   children:
     #CVP:
-     # hosts:
-       # cv_server:
-        #  ansible_httpapi_host: 192.168.64.9
-         # ansible_host: 192.168.64.9
-         # ansible_user: ansible
-         # ansible_password: interdata
-         # ansible_connection: httpapi
-         # ansible_httpapi_use_ssl: true
-         # ansible_httpapi_validate_certs: false
-         # ansible_network_os: eos
-         # ansible_httpapi_port: 443
-          # Configuration to get Virtual Env information
-          #ansible_python_interpreter: $(which python3)
+    #  hosts:
+    #    cv_server:
+    #      ansible_httpapi_host: 192.168.64.9
+    #      ansible_host: 192.168.64.9
+    #      ansible_user: ansible
+    #      ansible_password: interdata
+    #      ansible_connection: httpapi
+    #      ansible_httpapi_use_ssl: true
+    #      ansible_httpapi_validate_certs: false
+    #      ansible_network_os: eos
+    #      ansible_httpapi_port: 443
+    #      Configuration to get Virtual Env information
+    #      ansible_python_interpreter: $(which python3)
+    
     # DC1_Fabric - EVPN Fabric running in home lab
     DC1:
       children:
@@ -25,7 +26,15 @@ all:
                 DC1-SPINE1:
                   ansible_host: 172.20.20.11
                 DC1-SPINE2:
-                  ansible_host: 172.20.20.12 
+                  ansible_host: 172.20.20.12
+            DC1_LEAFS:
+              hosts:
+                # Add your leaf switches here
+                # Example:
+                # DC1-LEAF1:
+                #   ansible_host: 172.20.20.21
+                # DC1-LEAF2:
+                #   ansible_host: 172.20.20.22
           vars:
             ansible_connection: httpapi
             ansible_network_os: eos
