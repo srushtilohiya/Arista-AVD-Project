@@ -20,7 +20,7 @@
   - name: generate device intended config and documentation
     tags: [build, generate]
     import_role:
-      name: arista.avd.eos_cli_config_gen
+      name: eos_cli_config_gen
 
   - name: Deploy configuration to devices
     tags: [build, generate]
