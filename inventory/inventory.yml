@@ -13,13 +13,17 @@ all:
           vars:
             ansible_connection: httpapi
             ansible_network_os: eos
-            ansible_become: true
-            ansible_become_method: enable
             ansible_user: admin
             ansible_password: admin
+            ansible_become: true
+            ansible_become_method: enable
+
+            # Use HTTPS and ignore cert validation
             ansible_httpapi_use_ssl: true
             ansible_httpapi_validate_certs: false
             ansible_httpapi_port: 443
+
+            # Optional service config (your custom vars)
             evpn_services_l2_only: false
             evpn_services_l3_only: false
             evpn_vlan_aware_bundles: true
