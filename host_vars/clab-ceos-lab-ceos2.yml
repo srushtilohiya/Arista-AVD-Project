@@ -26,4 +26,3 @@ platform_settings:
 
 # Use new variable name instead of deprecated one
 evpn_vlan_aware_bundles: true
-vxlan_vlan_aware_bundles: null  # Explicitly remove deprecated variable
