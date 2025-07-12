@@ -23,3 +23,4 @@ all:
             ansible_httpapi_port: 443
             evpn_services_l2_only: false
             evpn_services_l3_only: false
+            evpn_vlan_aware_bundles: true  # Updated variable name
