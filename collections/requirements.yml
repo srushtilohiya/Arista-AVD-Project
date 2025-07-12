@@ -1,6 +1,10 @@
 ---
 collections:
   - name: arista.avd
-    version: 4.9.0        # requires ansible.utils >= 3.0.0
+    version: 4.9.0
+  - name: ansible.netcommon
+    version: 6.0.0
   - name: ansible.utils
-    version: 2.11.0       # this is incompatible
+    version: 3.0.0
+  - name: community.network
+    version: 5.0.0
