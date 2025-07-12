@@ -87,6 +87,9 @@ platform_settings:
       queue_monitor_length: false
       interface_storm_control: false
 
+# EVPN VLAN aware bundles (updated variable name)
+evpn_vlan_aware_bundles: true
+
 # Optional CVP configlets
 # cv_configlets:
 #   containers:
