@@ -39,12 +39,13 @@ l3leaf:
   defaults:
     virtual_router_mac_address: 00:1c:73:00:dc:01
     platform: cEOS
-    bgp_as: 65100  # Will be overridden per group
     spines: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
     uplink_to_spine_interfaces: [Ethernet1, Ethernet2]
     mlag_interfaces: [Ethernet3, Ethernet4]
     spanning_tree_priority: 4096
     spanning_tree_mode: mstp
+    loopback_ipv4_pool: 192.168.255.0/24
+    vtep_loopback_ipv4_pool: 192.168.254.0/24
   node_groups:
     DC1_LEAF1:
       bgp_as: 65101
@@ -52,11 +53,11 @@ l3leaf:
         clab-ceos-lab-leaf1a:
           id: 1
           mgmt_ip: 172.20.20.21/24
-          spine_interfaces: [Ethernet1, Ethernet2]  # To ceos1 and ceos2
+          spine_interfaces: [Ethernet1, Ethernet2]
         clab-ceos-lab-leaf1b:
           id: 2
           mgmt_ip: 172.20.20.22/24
-          spine_interfaces: [Ethernet1, Ethernet2]  # To ceos1 and ceos2
+          spine_interfaces: [Ethernet1, Ethernet2]
 
 spine_bgp_defaults:
   - no bgp default ipv4-unicast
@@ -86,9 +87,8 @@ platform_settings:
       queue_monitor_length: false
       interface_storm_control: false
 
-# Optional CVP configlets (not used in your current lab)
+# Optional CVP configlets
 # cv_configlets:
 #   containers:
 #     DC1_L3LEAFS:
-#       - ASE_GLOBAL-ALIASES  # Is this correct?
-
+#       - ASE_GLOBAL-ALIASES
