@@ -10,13 +10,8 @@ all:
               hosts:
                 clab-ceos-lab-ceos1:
                   ansible_host: 172.20.20.11
-                  # ADD THESE VARIABLES:
-                  evpn_vlan_aware_bundles: true  # Replaces vxlan_vlan_aware_bundles
-                  cvp_instance_ips: ["10.255.0.1"]  # Replaces cvp_instance_ip
                 clab-ceos-lab-ceos2:
                   ansible_host: 172.20.20.12
-                  evpn_vlan_aware_bundles: true
-                  cvp_instance_ips: ["10.255.0.1"]
           vars:
             ansible_connection: httpapi
             ansible_network_os: eos
