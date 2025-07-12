@@ -1,39 +1,77 @@
+fabric_name: DC1_FABRIC
+
+mgmt_interface: Management0
+mgmt_interface_vrf: default
+mgmt_gateway: 172.20.20.1
+
+p2p_uplinks_mtu: 1500
+
+# Required pools
+loopback_ipv4_pool: 192.168.255.0/24
+vtep_loopback_ipv4_pool: 192.168.254.0/24
+mlag_peer_ipv4_pool: 10.255.252.0/24
+mlag_peer_l3_ipv4_pool: 10.255.251.0/24
+
+bgp_peer_groups:
+  ipv4_underlay_peers:
+    password: "AQQvKeimxJu+uGQ/yYvv9w=="
+  evpn_overlay_peers:
+    password: "q+VNViP5i4rVjW1cxFv2wA=="
+  mlag_ipv4_underlay_peer:
+    password: "vnEaG8gMeQf3d3cN6PktXQ=="
+
 spine:
-  type: spine  # ✅ Required by AVD
+  type: spine
   defaults:
     bgp_as: 65001
+    platform: cEOS
     loopback_ipv4_pool: 192.168.255.0/24
-  platform: cEOS
-  leaf_as_allocation_range: 65101-65132
   nodes:
-    clab-ceos-lab-ceos1:
+    - name: clab-ceos-lab-ceos1
       id: 1
       mgmt_ip: 172.20.20.11/24
-    clab-ceos-lab-ceos2:
+    - name: clab-ceos-lab-ceos2
       id: 2
       mgmt_ip: 172.20.20.12/24
 
 l3leaf:
-  type: l3leaf  # ✅ Required by AVD
+  type: l3leaf
   defaults:
-    virtual_router_mac_address: 00:1c:73:00:dc:01
     platform: cEOS
-    spines: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
-    uplink_to_spine_interfaces: [Ethernet1, Ethernet2]
-    mlag_interfaces: [Ethernet3, Ethernet4]
-    spanning_tree_priority: 4096
-    spanning_tree_mode: mstp
     loopback_ipv4_pool: 192.168.255.0/24
     vtep_loopback_ipv4_pool: 192.168.254.0/24
+    mlag_interfaces: [Ethernet3, Ethernet4]
+    virtual_router_mac_address: 00:1c:73:00:dc:01
+    uplink_to_spine_interfaces: [Ethernet1, Ethernet2]
+    spines: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
   node_groups:
-    DC1_LEAF1:
+    - group: DC1_LEAF1
       bgp_as: 65101
       nodes:
-        clab-ceos-lab-leaf1a:
+        - name: clab-ceos-lab-leaf1a
           id: 1
           mgmt_ip: 172.20.20.21/24
-          spine_interfaces: [Ethernet1, Ethernet2]
-        clab-ceos-lab-leaf1b:
+          uplink_switches: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
+          uplink_interfaces: [Ethernet1, Ethernet2]
+          mlag_peer_ip: 10.255.252.1
+          mlag_peer_l3_ip: 10.255.251.1
+        - name: clab-ceos-lab-leaf1b
           id: 2
           mgmt_ip: 172.20.20.22/24
-          spine_interfaces: [Ethernet1, Ethernet2]
+          uplink_switches: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
+          uplink_interfaces: [Ethernet1, Ethernet2]
+          mlag_peer_ip: 10.255.252.2
+          mlag_peer_l3_ip: 10.255.251.2
+
+# Optional
+spine_bgp_defaults:
+  - no bgp default ipv4-unicast
+  - distance bgp 20 200 200
+  - graceful-restart restart-time 300
+  - graceful-restart
+
+leaf_bgp_defaults:
+  - no bgp default ipv4-unicast
+  - distance bgp 20 200 200
+  - graceful-restart restart-time 300
+  - graceful-restart
