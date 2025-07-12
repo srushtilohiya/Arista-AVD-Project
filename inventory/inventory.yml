@@ -1,3 +1,4 @@
+# inventory.yml (updated)
 ---
 all:
   children:
@@ -9,8 +10,13 @@ all:
               hosts:
                 clab-ceos-lab-ceos1:
                   ansible_host: 172.20.20.11
+                  # ADD THESE VARIABLES:
+                  evpn_vlan_aware_bundles: true  # Replaces vxlan_vlan_aware_bundles
+                  cvp_instance_ips: ["10.255.0.1"]  # Replaces cvp_instance_ip
                 clab-ceos-lab-ceos2:
                   ansible_host: 172.20.20.12
+                  evpn_vlan_aware_bundles: true
+                  cvp_instance_ips: ["10.255.0.1"]
           vars:
             ansible_connection: httpapi
             ansible_network_os: eos
@@ -19,3 +25,6 @@ all:
             ansible_httpapi_use_ssl: true
             ansible_httpapi_validate_certs: false
             ansible_httpapi_port: 443
+            # Add these fabric-wide variables:
+            evpn_services_l2_only: false
+            evpn_services_l3_only: false
