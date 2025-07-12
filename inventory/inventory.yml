@@ -35,7 +35,7 @@ all:
             ansible_httpapi_validate_certs: false
             ansible_httpapi_port: 443
 
-            # Required pools
+            # Required IP pools
             loopback_ipv4_pool: 192.168.255.0/24
             vtep_loopback_ipv4_pool: 192.168.254.0/24
             mlag_peer_ipv4_pool: 10.255.252.0/24
@@ -54,7 +54,7 @@ all:
                   id: 2
                   mgmt_ip: 172.20.20.12/24
 
-            # Leaf definition
+            # L3 Leaf definition
             l3leaf:
               defaults:
                 platform: cEOS
