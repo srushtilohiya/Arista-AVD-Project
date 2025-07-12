@@ -8,14 +8,19 @@ all:
               hosts:
                 clab-ceos-lab-ceos1:
                   ansible_host: 172.20.20.11
+                  type: spine
                 clab-ceos-lab-ceos2:
                   ansible_host: 172.20.20.12
+                  type: spine
+
             DC1_LEAFS:
               hosts:
                 clab-ceos-lab-leaf1a:
                   ansible_host: 172.20.20.21
+                  type: l3leaf
                 clab-ceos-lab-leaf1b:
                   ansible_host: 172.20.20.22
+                  type: l3leaf
 
           vars:
             fabric_name: DC1_FABRIC
