@@ -1,4 +1,3 @@
-# inventory.yml (updated)
 ---
 all:
   children:
@@ -17,9 +16,10 @@ all:
             ansible_network_os: eos
             ansible_become: true
             ansible_become_method: enable
+            ansible_user: admin      # REQUIRED
+            ansible_password: admin    # REQUIRED
             ansible_httpapi_use_ssl: true
             ansible_httpapi_validate_certs: false
             ansible_httpapi_port: 443
-            # Add these fabric-wide variables:
             evpn_services_l2_only: false
             evpn_services_l3_only: false
