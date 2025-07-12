@@ -3,27 +3,45 @@ all:
     DC1:
       children:
         DC1_FABRIC:
+          children:
+            DC1_SPINES:
+              hosts:
+                clab-ceos-lab-ceos1:
+                  ansible_host: 172.20.20.11
+                  type: spine
+                clab-ceos-lab-ceos2:
+                  ansible_host: 172.20.20.12
+                  type: spine
+            DC1_LEAFS:
+              hosts:
+                clab-ceos-lab-leaf1a:
+                  ansible_host: 172.20.20.21
+                  type: l3leaf
+                clab-ceos-lab-leaf1b:
+                  ansible_host: 172.20.20.22
+                  type: l3leaf
+
           vars:
             fabric_name: DC1_FABRIC
 
-            # AVD-required pools
-            loopback_ipv4_pool: 192.168.255.0/24
-            vtep_loopback_ipv4_pool: 192.168.254.0/24
-            mlag_peer_ipv4_pool: 10.255.252.0/24
-            mlag_peer_l3_ipv4_pool: 10.255.251.0/24
-
-            # Ansible connection vars
             ansible_connection: httpapi
             ansible_network_os: eos
             ansible_user: admin
             ansible_password: admin
             ansible_become: true
             ansible_become_method: enable
+
             ansible_httpapi_use_ssl: true
             ansible_httpapi_validate_certs: false
             ansible_httpapi_port: 443
 
-            # Spine topology
+            # Required pools
+            loopback_ipv4_pool: 192.168.255.0/24
+            vtep_loopback_ipv4_pool: 192.168.254.0/24
+            mlag_peer_ipv4_pool: 10.255.252.0/24
+            mlag_peer_l3_ipv4_pool: 10.255.251.0/24
+
+            # Spine definition
             spine:
               defaults:
                 platform: cEOS
@@ -36,7 +54,7 @@ all:
                   id: 2
                   mgmt_ip: 172.20.20.12/24
 
-            # L3 Leaf topology
+            # Leaf definition
             l3leaf:
               defaults:
                 platform: cEOS
@@ -63,18 +81,3 @@ all:
                       mlag_peer_ip: 10.255.252.2
                       mlag_peer_l3_ip: 10.255.251.2
                       mlag_interfaces: [ Ethernet3, Ethernet4 ]
-
-          children:
-            DC1_SPINES:
-              hosts:
-                clab-ceos-lab-ceos1:
-                  ansible_host: 172.20.20.11
-                clab-ceos-lab-ceos2:
-                  ansible_host: 172.20.20.12
-
-            DC1_LEAFS:
-              hosts:
-                clab-ceos-lab-leaf1a:
-                  ansible_host: 172.20.20.21
-                clab-ceos-lab-leaf1b:
-                  ansible_host: 172.20.20.22
