@@ -11,9 +11,6 @@ mlag_ips:
   leaf_peer_l3: 10.255.251.0/24
   mlag_peer: 10.255.252.0/24
 
-# ✅ FIXED: Removed deprecated 'vxlan_vlan_aware_bundles'
-# AVD now auto-detects EVPN VLAN aware bundles if you define them correctly per node group or leaf
-
 bgp_peer_groups:
   ipv4_underlay_peers:
     password: "AQQvKeimxJu+uGQ/yYvv9w=="
