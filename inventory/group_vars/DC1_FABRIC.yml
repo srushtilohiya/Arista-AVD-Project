@@ -23,10 +23,11 @@ mgmt_interface_vrf: default
 mgmt_gateway: 172.20.20.1
 
 spine:
+  defaults:
+    loopback_ipv4_pool: 192.168.255.0/24
   platform: cEOS
   bgp_as: 65001
   leaf_as_allocation_range: 65101-65132
-  loopback_ipv4_pool: 192.168.255.0/24  # <-- Added here
   nodes:
     clab-ceos-lab-ceos1:
       id: 1
