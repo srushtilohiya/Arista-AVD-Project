@@ -20,8 +20,65 @@ all:
                 clab-ceos-lab-leaf1b:
                   ansible_host: 172.20.20.22
                   type: l3leaf
-              vars:  # <-- move IP pools HERE
+              vars:
                 mlag_peer_ipv4_pool: 10.255.252.0/24
                 mlag_peer_l3_ipv4_pool: 10.255.251.0/24
                 loopback_ipv4_pool: 192.168.255.0/24
                 vtep_loopback_ipv4_pool: 192.168.254.0/24
+
+        # Variables specific to the entire fabric
+        DC1_FABRIC:
+          vars:
+            fabric_name: DC1_FABRIC
+
+            ansible_connection: httpapi
+            ansible_network_os: eos
+            ansible_user: admin
+            ansible_password: admin
+            ansible_become: true
+            ansible_become_method: enable
+
+            ansible_httpapi_use_ssl: true
+            ansible_httpapi_validate_certs: false
+            ansible_httpapi_port: 443
+
+            # Spine definition
+            spine:
+              defaults:
+                platform: cEOS
+                bgp_as: 65001
+              nodes:
+                - name: clab-ceos-lab-ceos1
+                  id: 1
+                  mgmt_ip: 172.20.20.11/24
+                - name: clab-ceos-lab-ceos2
+                  id: 2
+                  mgmt_ip: 172.20.20.12/24
+
+            # Leaf definition
+            l3leaf:
+              defaults:
+                platform: cEOS
+                loopback_ipv4_pool: 192.168.255.0/24
+                mlag_interfaces: [ Ethernet3, Ethernet4 ]
+                virtual_router_mac_address: 00:1c:73:00:dc:01
+              node_groups:
+                - group: DC1_LEAF1
+                  bgp_as: 65101
+                  nodes:
+                    - name: clab-ceos-lab-leaf1a
+                      id: 1
+                      mgmt_ip: 172.20.20.21/24
+                      uplink_interfaces: [ Ethernet1, Ethernet2 ]
+                      uplink_switches: [ clab-ceos-lab-ceos1, clab-ceos-lab-ceos2 ]
+                      mlag_peer_ip: 10.255.252.1
+                      mlag_peer_l3_ip: 10.255.251.1
+                      mlag_interfaces: [ Ethernet3, Ethernet4 ]
+                    - name: clab-ceos-lab-leaf1b
+                      id: 2
+                      mgmt_ip: 172.20.20.22/24
+                      uplink_interfaces: [ Ethernet1, Ethernet2 ]
+                      uplink_switches: [ clab-ceos-lab-ceos1, clab-ceos-lab-ceos2 ]
+                      mlag_peer_ip: 10.255.252.2
+                      mlag_peer_l3_ip: 10.255.251.2
+                      mlag_interfaces: [ Ethernet3, Ethernet4 ]
