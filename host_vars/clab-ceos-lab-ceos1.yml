@@ -23,3 +23,7 @@ platform_settings:
     reload_delay:
       mlag: 300
       non_mlag: 330
+
+# Use new variable name instead of deprecated one
+evpn_vlan_aware_bundles: true
+vxlan_vlan_aware_bundles: null  # Explicitly remove deprecated variable
