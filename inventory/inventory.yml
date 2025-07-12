@@ -24,3 +24,4 @@ all:
             evpn_services_l2_only: false
             evpn_services_l3_only: false
             evpn_vlan_aware_bundles: true  # Updated variable name
+            vxlan_vlan_aware_bundles: null  # Explicitly remove deprecated variable
