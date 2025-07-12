@@ -24,9 +24,9 @@ mgmt_gateway: 172.20.20.1
 
 spine:
   defaults:
-    loopback_ipv4_pool: 192.168.255.0/24
+    bgp_as: 65001                    # ✅ Fixed: moved under defaults
+    loopback_ipv4_pool: 192.168.255.0/24  # ✅ Fixed: added loopback_ipv4_pool
   platform: cEOS
-  bgp_as: 65001
   leaf_as_allocation_range: 65101-65132
   nodes:
     clab-ceos-lab-ceos1:
