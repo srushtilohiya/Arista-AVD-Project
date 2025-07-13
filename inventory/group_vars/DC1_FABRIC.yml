@@ -9,8 +9,8 @@ p2p_uplinks_mtu: 1500
 # Required pools
 loopback_ipv4_pool: 192.168.255.0/24
 vtep_loopback_ipv4_pool: 192.168.254.0/24
-mlag_peer_ipv4_pool: 10.255.252.0/24
-mlag_peer_l3_ipv4_pool: 10.255.251.0/24
+mlag_peer_ipv4_pool: 10.255.252.0/31
+mlag_peer_l3_ipv4_pool: 10.255.251.0/31
 
 bgp_peer_groups:
   ipv4_underlay_peers:
