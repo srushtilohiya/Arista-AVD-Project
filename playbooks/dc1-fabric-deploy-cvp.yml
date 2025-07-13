@@ -4,7 +4,9 @@
   gather_facts: false
   collections:
     - arista.avd
+
   tasks:
+
     - name: Reset local folders for output
       tags: [build, generate]
       import_role:
@@ -28,3 +30,24 @@
       tags: [deploy]
       import_role:
         name: arista.avd.eos_config_deploy_eapi
+
+    # New: Slurp generated CLI config and expose via AWX
+    - name: Read rendered config from /tmp/intended/configs
+      slurp:
+        src: "/tmp/intended/configs/{{ inventory_hostname }}.cfg"
+      register: rendered_config
+      delegate_to: localhost
+      run_once: false
+
+    - name: Show rendered config in AWX UI
+      debug:
+        msg: "{{ rendered_config['content'] | b64decode }}"
+      delegate_to: localhost
+      run_once: false
+
+    - name: Store config output for AWX job artifact
+      set_stats:
+        data:
+          "{{ inventory_hostname }}_config": "{{ rendered_config['content'] | b64decode }}"
+      delegate_to: localhost
+      run_once: false
