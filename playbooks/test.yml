@@ -1,0 +1,21 @@
+
+---
+- name: Check AVD Version Compatibility
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Check AVD collection version
+      command: ansible-galaxy collection list arista.avd
+      register: avd_version
+      
+    - name: Display AVD version
+      debug:
+        msg: "{{ avd_version.stdout }}"
+        
+    - name: Check pyavd version
+      command: python -c "import pyavd; print(f'pyavd version: {pyavd.__version__}')"
+      register: pyavd_version
+      
+    - name: Display pyavd version
+      debug:
+        msg: "{{ pyavd_version.stdout }}"
