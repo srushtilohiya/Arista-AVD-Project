@@ -2,7 +2,7 @@
 root_dir: '/tmp/'
 inventory_file: '{{root_dir}}/inventory.yml'
 evpn_vlan_aware_bundles: true
-
+avd_ignore_requirements: true  # Add this line
 
 ansible_connection: httpapi
 ansible_network_os: eos
