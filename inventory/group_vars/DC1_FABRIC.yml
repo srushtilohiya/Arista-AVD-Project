@@ -9,8 +9,8 @@ p2p_uplinks_mtu: 1500
 # Required pools
 loopback_ipv4_pool: 192.168.255.0/24
 vtep_loopback_ipv4_pool: 192.168.254.0/24
-mlag_peer_ipv4_pool: 10.255.252.0/31
-mlag_peer_l3_ipv4_pool: 10.255.251.0/31
+mlag_peer_ipv4_pool: 10.255.252.0/24
+mlag_peer_l3_ipv4_pool: 10.255.251.0/24
 
 bgp_peer_groups:
   ipv4_underlay_peers:
@@ -21,7 +21,6 @@ bgp_peer_groups:
     password: "vnEaG8gMeQf3d3cN6PktXQ=="
 
 spine:
-  type: spine
   defaults:
     bgp_as: 65001
     platform: cEOS
@@ -35,11 +34,12 @@ spine:
       mgmt_ip: 172.20.20.12/24
 
 l3leaf:
-  type: l3leaf
   defaults:
     platform: cEOS
     loopback_ipv4_pool: 192.168.255.0/24
     vtep_loopback_ipv4_pool: 192.168.254.0/24
+    mlag_peer_ipv4_pool: 10.255.252.0/24
+    mlag_peer_l3_ipv4_pool: 10.255.251.0/24
     mlag_interfaces: [Ethernet3, Ethernet4]
     virtual_router_mac_address: 00:1c:73:00:dc:01
     uplink_to_spine_interfaces: [Ethernet1, Ethernet2]
@@ -63,7 +63,6 @@ l3leaf:
           mlag_peer_ip: 10.255.252.2
           mlag_peer_l3_ip: 10.255.251.2
 
-# Optional
 spine_bgp_defaults:
   - no bgp default ipv4-unicast
   - distance bgp 20 200 200
