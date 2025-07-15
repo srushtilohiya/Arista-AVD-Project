@@ -13,6 +13,9 @@ all:
                   ansible_host: 172.20.20.12
                   type: spine
             DC1_LEAFS:
+               vars:
+                  mlag_peer_ipv4_pool: 10.255.252.0/24
+                  mlag_peer_l3_ipv4_pool: 10.255.251.0/24
               hosts:
                 clab-ceos-lab-leaf1a:
                   ansible_host: 172.20.20.21
