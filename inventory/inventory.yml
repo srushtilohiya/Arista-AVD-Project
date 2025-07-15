@@ -14,8 +14,10 @@ all:
               hosts:
                 clab-ceos-lab-leaf1a:
                   ansible_host: 172.20.20.21
+                  type: spine
                 clab-ceos-lab-leaf1b:
                   ansible_host: 172.20.20.22
+                  type: spine
           vars:
             ansible_connection: httpapi
             ansible_network_os: eos
