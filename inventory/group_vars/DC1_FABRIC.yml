@@ -44,6 +44,7 @@ l3leaf:
     virtual_router_mac_address: 00:1c:73:00:dc:01
     uplink_to_spine_interfaces: [Ethernet1, Ethernet2]
     spines: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
+
   node_groups:
     - group: DC1_LEAF1
       bgp_as: 65101
@@ -53,13 +54,18 @@ l3leaf:
           mgmt_ip: 172.20.20.21/24
           uplink_switches: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
           uplink_interfaces: [Ethernet1, Ethernet2]
+          uplink_switch_interfaces:
+            - [Ethernet1, Ethernet1]  # to ceos1 and ceos2
           mlag_peer_ip: 10.255.252.1
           mlag_peer_l3_ip: 10.255.251.1
+
         - name: clab-ceos-lab-leaf1b
           id: 2
           mgmt_ip: 172.20.20.22/24
           uplink_switches: [clab-ceos-lab-ceos1, clab-ceos-lab-ceos2]
           uplink_interfaces: [Ethernet1, Ethernet2]
+          uplink_switch_interfaces:
+            - [Ethernet2, Ethernet2]
           mlag_peer_ip: 10.255.252.2
           mlag_peer_l3_ip: 10.255.251.2
 
