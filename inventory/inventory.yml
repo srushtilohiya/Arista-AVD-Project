@@ -8,16 +8,22 @@ all:
               hosts:
                 clab-ceos-lab-ceos1:
                   ansible_host: 172.20.20.11
+                  type: spine
+                  id: 1
                 clab-ceos-lab-ceos2:
                   ansible_host: 172.20.20.12
+                  type: spine
+                  id: 2
             DC1_LEAFS:
               hosts:
                 clab-ceos-lab-leaf1a:
                   ansible_host: 172.20.20.21
-                  type: spine
+                  type: l3leaf
+                  id: 1
                 clab-ceos-lab-leaf1b:
                   ansible_host: 172.20.20.22
-                  type: spine
+                  type: l3leaf
+                  id: 2
           vars:
             ansible_connection: httpapi
             ansible_network_os: eos
