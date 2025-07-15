@@ -2,9 +2,11 @@
 collections:
   - name: arista.avd
     version: 4.9.0
-  - name: ansible.netcommon
-    version: 6.0.0
   - name: ansible.utils
     version: 3.0.0
   - name: community.network
     version: 5.0.0
+  - name: arista.eos
+    version: 11.0.1
+  - name: ansible.netcommon
+    version: 6.1.0   # Change this to a stable version that satisfies the dependencies
