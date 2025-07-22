@@ -26,6 +26,7 @@ all:
 
       vars:
         fabric_name: DC1_FABRIC
+        <<: "{{ lookup('file', 'group_vars/DC1_FABRIC.yml') | from_yaml }}"
         ansible_connection: httpapi
         ansible_network_os: eos
         ansible_user: admin
