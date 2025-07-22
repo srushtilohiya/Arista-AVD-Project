@@ -1,36 +1,37 @@
 all:
   children:
-    DC1:
+    DC1_FABRIC:
       children:
-        DC1_FABRIC:
-          children:
-            DC1_SPINES:
-              hosts:
-                clab-ceos-lab-ceos1:
-                  ansible_host: 172.20.20.11
-                  type: spine
-                  id: 1
-                clab-ceos-lab-ceos2:
-                  ansible_host: 172.20.20.12
-                  type: spine
-                  id: 2
-            DC1_LEAFS:
-              hosts:
-                clab-ceos-lab-leaf1a:
-                  ansible_host: 172.20.20.21
-                  type: l3leaf
-                  id: 1
-                clab-ceos-lab-leaf1b:
-                  ansible_host: 172.20.20.22
-                  type: l3leaf
-                  id: 2
-          vars:
-            ansible_connection: httpapi
-            ansible_network_os: eos
-            ansible_user: admin
-            ansible_password: admin
-            ansible_become: true
-            ansible_become_method: enable
-            ansible_httpapi_use_ssl: true
-            ansible_httpapi_validate_certs: false
-            ansible_httpapi_port: 443
+        DC1_SPINES:
+          hosts:
+            clab-ceos-lab-ceos1:
+              ansible_host: 172.20.20.11
+              type: spine
+              id: 1
+            clab-ceos-lab-ceos2:
+              ansible_host: 172.20.20.12
+              type: spine
+              id: 2
+
+        DC1_LEAFS:
+          hosts:
+            clab-ceos-lab-leaf1a:
+              ansible_host: 172.20.20.21
+              type: l3leaf
+              id: 1
+            clab-ceos-lab-leaf1b:
+              ansible_host: 172.20.20.22
+              type: l3leaf
+              id: 2
+
+      vars:
+        fabric_name: DC1_FABRIC
+        ansible_connection: httpapi
+        ansible_network_os: eos
+        ansible_user: admin
+        ansible_password: admin
+        ansible_become: true
+        ansible_become_method: enable
+        ansible_httpapi_use_ssl: true
+        ansible_httpapi_validate_certs: false
+        ansible_httpapi_port: 443
