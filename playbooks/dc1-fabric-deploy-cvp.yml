@@ -12,9 +12,9 @@
       import_role:
         name: arista.avd.build_output_folders
 
-    - name: 🔍 DEBUG — Dump all host variables before eos_designs
-      debug:
-        var: hostvars[inventory_hostname]
+    # - name: 🔍 DEBUG — Dump all host variables before eos_designs
+    #   debug:
+    #     var: hostvars[inventory_hostname]
 
     - name: Generate intended variables
       tags: [build, generate]
